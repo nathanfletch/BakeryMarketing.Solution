@@ -28,11 +28,11 @@ namespace BakeryMarketing
       services.AddMvc();
 
       services.AddEntityFrameworkMySql()
-        .AddDbContext<LibraryContext>(options => options
+        .AddDbContext<BakeryMarketingContext>(options => options
         .UseMySql(Configuration["ConnectionStrings:DefaultConnection"], ServerVersion.AutoDetect(Configuration["ConnectionStrings:DefaultConnection"])));
       
       services.AddIdentity<ApplicationUser, IdentityRole>()
-        .AddEntityFrameworkStores<LibraryContext>()
+        .AddEntityFrameworkStores<BakeryMarketingContext>()
         .AddDefaultTokenProviders();
       
       services.Configure<IdentityOptions>(options =>

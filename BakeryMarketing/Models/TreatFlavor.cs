@@ -1,4 +1,4 @@
-namespace Library.Models
+namespace BakeryMarketing.Models
 {
   public class TreatFlavor
   {

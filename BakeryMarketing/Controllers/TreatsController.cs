@@ -40,12 +40,12 @@ namespace BakeryMarketing.Controllers
     }
     public ActionResult Create()
     {
-      ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "Title");
+      ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "Name");
       return View();
     }
 
     [HttpPost]
-    public ActionResult Create(Treat treat, int FlavorId, string FlavorTitle)
+    public ActionResult Create(Treat treat, int FlavorId, string FlavorName)
     {
       _db.Treats.Add(treat);
       _db.SaveChanges();
@@ -53,9 +53,9 @@ namespace BakeryMarketing.Controllers
       {
         _db.TreatFlavor.Add(new TreatFlavor() { FlavorId = FlavorId, TreatId = treat.TreatId});
       }
-      if (FlavorTitle != null)
+      if (FlavorName != null)
       {
-        Flavor newFlavor = new Flavor() { Title = FlavorTitle };
+        Flavor newFlavor = new Flavor() { Name = FlavorName };
         _db.Flavors.Add(newFlavor);
         _db.SaveChanges();
         _db.TreatFlavor.Add(new TreatFlavor() { FlavorId = newFlavor.FlavorId, TreatId = treat.TreatId});
@@ -66,25 +66,25 @@ namespace BakeryMarketing.Controllers
     public ActionResult Edit(int id)
     {
       var thisTreat = _db.Treats.FirstOrDefault(treat => treat.TreatId == id);
-      ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "Title");
+      ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "Name");
       return View(thisTreat);
     }
 
     [HttpPost]
-    public ActionResult Edit(Treat Tteat, int FlavorId, string FlavorTitle)
+    public ActionResult Edit(Treat treat, int FlavorId, string FlavorName)
     {
       if (FlavorId != 0)
       {
         _db.TreatFlavor.Add(new TreatFlavor() {FlavorId = FlavorId, TreatId = treat.TreatId});
       }
-      if (FlavorTitle != null)
+      if (FlavorName != null)
       {
-        Flavor newFlavor = new Flavor() { Title = FlavorTitle };
+        Flavor newFlavor = new Flavor() { Name = FlavorName };
         _db.Flavors.Add(newFlavor);
         _db.SaveChanges();
         _db.TreatFlavor.Add(new TreatFlavor() { FlavorId = newFlavor.FlavorId, TreatId = treat.TreatId});
       }
-      _db.Entry(Treat).State = EntityState.Modified;
+      _db.Entry(treat).State = EntityState.Modified;
       _db.SaveChanges();
       return RedirectToAction("Index");
     }

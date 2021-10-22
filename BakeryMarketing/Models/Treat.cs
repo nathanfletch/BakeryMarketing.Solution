@@ -6,7 +6,7 @@ namespace BakeryMarketing.Models
     {
         public Treat()
         {
-            this.JoinEntities = new HashSet<>();
+            this.JoinEntities = new HashSet<TreatFlavor>();
         }
 
         public int TreatId { get; set; }
