@@ -43,7 +43,7 @@ namespace BakeryMarketing.Controllers
       ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "Name");
       return View();
     }
-
+    [Authorize]
     [HttpPost]
     public ActionResult Create(Treat treat, int FlavorId, string FlavorName)
     {
@@ -63,13 +63,14 @@ namespace BakeryMarketing.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+    [Authorize]
     public ActionResult Edit(int id)
     {
       var thisTreat = _db.Treats.FirstOrDefault(treat => treat.TreatId == id);
       ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "Name");
       return View(thisTreat);
-    }
-
+    } 
+    [Authorize]
     [HttpPost]
     public ActionResult Edit(Treat treat, int FlavorId, string FlavorName)
     {
@@ -88,13 +89,13 @@ namespace BakeryMarketing.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
-
+    [Authorize]
     public ActionResult Delete(int id)
     {
       var thisTreat = _db.Treats.FirstOrDefault(treat => treat.TreatId == id);
       return View(thisTreat);
     }
-
+    [Authorize]
     [HttpPost, ActionName("Delete")]
     public ActionResult DeleteConfirmed (int id)
     {
@@ -103,7 +104,7 @@ namespace BakeryMarketing.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
-
+    [Authorize]
     [HttpPost]
     public ActionResult DeleteFlavor(int joinId)
     {
@@ -112,7 +113,5 @@ namespace BakeryMarketing.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
-
-    
   }
 }
