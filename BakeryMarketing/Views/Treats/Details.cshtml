@@ -1,0 +1,24 @@
+@{
+  Layout = "_Layout";
+}
+
+@model BakeryMarketing.Models.Treat
+<h2>@Html.DisplayFor(model => model.Name)</h2>
+<h4>Flavors:</h4>
+@foreach (var join in Model.JoinEntities)
+{
+  <h4>@join.Flavor.Name</h4>
+  @if (User.Identity.IsAuthenticated) // && User.IsInRole("Admin")
+  {
+    @using (Html.BeginForm("DeleteFlavor", "Treats"))
+    {
+      @Html.Hidden("joinId", @join.TreatFlavorId)
+      <input type="submit" value="Remove flavor from treat"/>
+    }
+  }
+}
+@if (User.Identity.IsAuthenticated) // && User.IsInRole("Admin")
+{
+  <p>@Html.ActionLink("Edit this treat or add a flavor", "Edit", new {id = Model.TreatId})</p>
+  <p>@Html.ActionLink("Delete this treat", "Delete", new {id = Model.TreatId})</p>
+}
