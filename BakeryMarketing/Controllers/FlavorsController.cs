@@ -13,12 +13,12 @@ using System.Security.Claims;
 
 namespace BakeryMarketing.Controllers
 {
-  public class TreatsController : Controller
+  public class FlavorsController : Controller
   {
     private readonly BakeryMarketingContext _db;
     private readonly UserManager<ApplicationUser> _userManager;
 
-    public TreatsController(UserManager<ApplicationUser> userManager, BakeryMarketingContext db)
+    public FlavorsController(UserManager<ApplicationUser> userManager, BakeryMarketingContext db)
     {
       _userManager = userManager;
       _db = db;
@@ -26,17 +26,17 @@ namespace BakeryMarketing.Controllers
 
     public ActionResult Index()
     {
-      IEnumerable<Treat> sorted = _db.Treats.OrderBy(treat => treat.Name);
+      IEnumerable<Flavor> sorted = _db.Flavors.OrderBy(flavor => flavor.Name);
       return View(sorted);
     }
 
     public ActionResult Details(int id)
     {
-      var thisTreat = _db.Treats
-        .Include(treat => treat.JoinEntities)
-        .ThenInclude(join => join.Flavor)
-        .FirstOrDefault(treat => treat.TreatId == id);
-      return View(thisTreat);
+      var thisFlavor = _db.Flavors
+        .Include(flavor => flavor.JoinEntities)
+        .ThenInclude(join => join.Treat)
+        .FirstOrDefault(flavor => flavor.FlavorId == id);
+      return View(thisFlavor);
     }
     public ActionResult Create()
     {
