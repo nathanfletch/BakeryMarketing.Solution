@@ -14,9 +14,15 @@
 
   @Html.LabelFor(model => model.Name)
   @Html.EditorFor(model => model.Name)
+  <br>
 
-  @Html.Label("Select Treat")
+  @Html.Label("Add this flavor to an existing treat:")
   @Html.DropDownList("TreatId", "Select Treat")
+  <br>
+
+  @Html.Label("Enter an additional treat that has this flavor (this will add the treat to the system):")
+  @Html.TextBox("TreatName")
+  <br>
 
   <input type="submit" value="Save" />
 }
