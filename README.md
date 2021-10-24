@@ -48,8 +48,14 @@
 * Enter localhost:5000 in your browser to start using the app. 
 </details>
 
+## How to Use This App
+There are 3 ways to use this app: sign in as a chef, sign in as a manager, or don't sign in (this represents a customer). These roles can use the following routes:
+* Not signed in: Index and Details
+* Chef: Index, Details, and Create
+* Manager: Index, Details, Create, Edit, and Delete
+
 ## Known Issues
-* There are no known issues at this time.
+* Anyone can create a manager or chef account, so account creation should include more authorization.
 * Please contact me if you find any bugs or have suggestions. 
 
 ## Future Plans
